@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: uservice-party-registry-proxy
+  name: uservice-party-registry-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uservice-party-registry-proxy
+  template:
+    metadata:
+      labels:
+        app: uservice-party-registry-proxy
+        actorSystemName: uservice-party-registry-proxy
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: index-volume
+          emptyDir: {}
+      containers:
+        - name: uservice-party-registry-proxy
+          image: {{ .Values.containerRegistry }}/{{ .Values.imageRepository }}
+          command: ["bin/pdnd-interop-uservice-party-registry-proxy"]
+          args: ["-Dconfig.override_with_env_vars=true"]
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: management
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: "/alive"
+              port: management
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 30
+          ports:
+            - name: management
+              containerPort: 8558
+              protocol: TCP
+            - name: http
+              containerPort: 8088
+              protocol: TCP
+            - name: monitoring
+              containerPort: 9095
+              protocol: TCP
+          securityContext:
+            runAsUser: 1001
+            allowPrivilegeEscalation: false
+          envFrom:
+            - secretRef:
+                name: application-insights
+          env:
+            - name: JAVA_OPTS
+              value: -javaagent:/applicationinsights-agent.jar
+            - name: APPLICATIONINSIGHTS_ROLE_NAME
+              value: uservice-party-registry-proxy
+            - name: APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL
+              value: OFF
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: REQUIRED_CONTACT_POINT_NR
+              value: {{ .Values.replicas }}
+          volumeMounts:
+            - name: index-volume
+              mountPath: /opt/docker/index
