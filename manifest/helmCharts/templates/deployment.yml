@@ -56,13 +56,9 @@ spec:
           envFrom:
             - secretRef:
                 name: application-insights
+            - configMapRef:
+                name: uservice-party-registry-proxy
           env:
-            - name: JAVA_OPTS
-              value: -javaagent:/applicationinsights-agent.jar
-            - name: APPLICATIONINSIGHTS_ROLE_NAME
-              value: uservice-party-registry-proxy
-            - name: APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL
-              value: OFF
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
