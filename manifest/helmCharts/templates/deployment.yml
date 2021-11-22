@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: uservice-party-registry-proxy
-  name: uservice-party-registry-proxy
+    app: pdnd-interop-uservice-party-registry-proxy
+  name: pdnd-interop-uservice-party-registry-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: uservice-party-registry-proxy
+      app: pdnd-interop-uservice-party-registry-proxy
   template:
     metadata:
       labels:
-        app: uservice-party-registry-proxy
-        actorSystemName: uservice-party-registry-proxy
+        app: pdnd-interop-uservice-party-registry-proxy
+        actorSystemName: pdnd-interop-uservice-party-registry-proxy
     spec:
       imagePullSecrets:
         - name: regcred
@@ -21,7 +21,7 @@ spec:
         - name: index-volume
           emptyDir: {}
       containers:
-        - name: uservice-party-registry-proxy
+        - name: pdnd-interop-uservice-party-registry-proxy
           image: {{ .Values.containerRegistry }}/{{ .Values.imageRepository }}
           command: ["bin/pdnd-interop-uservice-party-registry-proxy"]
           args: ["-Dconfig.override_with_env_vars=true"]
