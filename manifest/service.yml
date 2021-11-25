@@ -4,7 +4,6 @@ metadata:
   labels:
     prometheus: "true"
   name: pdnd-interop-uservice-party-registry-proxy
-  namespace: pdnd-interop-uservice-party-registry-proxy
 spec:
   type: ClusterIP
   ports:

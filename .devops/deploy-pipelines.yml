@@ -35,8 +35,6 @@ variables:
   imageRepository: '$(K8S_IMAGE_REPOSITORY_NAME)'
   deployNamespace: '$(DEPLOY_NAMESPACE)'
 
-  # App configuration
-
   ${{ if eq(parameters['environment'], 'dev') }}:
     environment: 'DEV'
     dockerRegistryServiceConnection: '$(DEV_CONTAINER_REGISTRY_SERVICE_CONN)'
