@@ -18,7 +18,9 @@ spec:
       imagePullSecrets:
         - name: regcred
       volumes:
-        - name: index-volume
+        - name: categories-index-volume
+          emptyDir: {}
+        - name: institutions-index-volume
           emptyDir: {}
       containers:
         - name: pdnd-interop-uservice-party-registry-proxy
@@ -66,5 +68,7 @@ spec:
             - name: REQUIRED_CONTACT_POINT_NR
               value: "{{ .Values.replicas }}"
           volumeMounts:
-            - name: index-volume
-              mountPath: /opt/docker/index
+            - name: categories-index-volume
+              mountPath: /opt/docker/index/categories
+            - name: institutions-index-volume
+              mountPath: /opt/docker/index/institutions
