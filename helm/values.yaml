@@ -10,7 +10,7 @@ image:
   tag: "latest"
 
 commandConfig:
-  command: ["bin/pdnd-interop-uservice-party-registry-proxy"]
+  command: ["bin/interop-be-party-registry-proxy"]
   args: ["-Dconfig.override_with_env_vars=true"]
 
 imagePullSecrets:
@@ -29,7 +29,7 @@ volumeMounts:
     mountPath: /opt/docker/index/institutions
 
 nameOverride: ""
-fullnameOverride: "pdnd-interop-uservice-party-registry-proxy"
+fullnameOverride: "interop-be-party-registry-proxy"
 
 containers:
   portNumber: 8088
@@ -60,7 +60,7 @@ ingress:
   className: ""
   annotations:
    kubernetes.io/ingress.class: "nginx"
-   nginx.ingress.kubernetes.io/rewrite-target: "/pdnd-interop-uservice-$1/0.1/$2"
+   nginx.ingress.kubernetes.io/rewrite-target: "/interop-be-$1/0.1/$2"
    nginx.ingress.kubernetes.io/ssl-redirect: "false"
    nginx.ingress.kubernetes.io/use-regex: "true"
    nginx.ingress.kubernetes.io/enable-cors: "true"
