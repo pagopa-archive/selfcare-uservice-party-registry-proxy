@@ -46,6 +46,8 @@ spec:
             - secretRef:
                 name: application-insights
             - configMapRef:
+                name: jwt
+            - configMapRef:
                 name: {{ include "this.fullname" . }}
           env:
             - name: NAMESPACE
