@@ -1,6 +1,6 @@
 image:
   repository: selcdacr.azurecr.io/uservicepartyregistryproxy
-  tag: 0.1.8
+  tag: 0.1.9
 
 replicaCount: 1
 
