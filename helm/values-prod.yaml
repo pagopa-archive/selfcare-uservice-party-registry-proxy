@@ -3,6 +3,10 @@ image:
   pullPolicy: Always # TODO change me in IfNotPresent when each build will have a different tag
   tag: 0.1.8
 
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://selfcare.pagopa.it"
+
 replicaCount: 1
 
 autoscaling:
