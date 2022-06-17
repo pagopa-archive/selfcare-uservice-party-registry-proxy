@@ -20,4 +20,4 @@ configEnvSpecific:
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL: "OFF"
   REQUIRED_CONTACT_POINT_NR: "1"
   MOCK_ORIGIN: "static"
-  PARTY_MOCK_REGISTRY_INSTITUTIONS_URL: "https://selcpcheckoutsa.z6.web.core.windows.net/resources/ORIGIN-mock.json"
+  PARTY_MOCK_REGISTRY_INSTITUTIONS_URL: "https://selcdcheckoutsa.z6.web.core.windows.net/resources/ORIGIN-mock.json"
