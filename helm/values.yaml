@@ -69,7 +69,7 @@ ingress:
   hosts:
     - host: ""
       paths:
-        - path: "/(party-registry-proxy)/v1/(.*)"
+        - path: "/(OLD-party-registry-proxy)/v1/(.*)"
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
